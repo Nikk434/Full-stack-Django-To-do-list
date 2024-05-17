@@ -68,7 +68,7 @@ def login(request):
             messages.error(request, "User does not exist")
             return render(request, 'todoapp/login.html', {})
     
-    return render(request, 'todoapp/login.html', {})
+    return render(request, 'todoapp/login.html',{})
 
 @login_required
 def deleteTask(request,name):
