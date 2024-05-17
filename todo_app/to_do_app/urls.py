@@ -7,5 +7,4 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('delete/<str:name>/', views.deleteTask, name='delete'),
     path('complete/<str:name>/', views.completeTask, name='complete'),
-
 ]
