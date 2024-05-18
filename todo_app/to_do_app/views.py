@@ -31,20 +31,20 @@ def register(request):
         # password check
         if len(password)<8:
             messages.error(request,"Password must be atleast 8 charecters")
-            return render(request, 'todoapp/register.html', {})
+            return redirect('register')
 
         # user check
         get_users = User.objects.filter(username=name)
         if get_users:
             messages.error(request,"User already exist !")
-            return render(request, 'todoapp/register.html', {})
+            return redirect('register')
 
 
         new_user = User.objects.create_user(username=name, email=email, password=password)
         new_user.save()
         messages.success(request, "Registration suceessful! Log in now ")
-        return render(request, 'todoapp/login.html', {})
-
+        # return render(request, 'todoapp/login.html', {})
+        return redirect('login')
 
     return render(request, 'todoapp/register.html', {})
 
@@ -63,10 +63,10 @@ def login(request):
         check_user = authenticate(username=username, password = password)
         if check_user is not None:
             auth_login(request, check_user)
-            return render(request, 'todoapp/todo.html', {})
+            return redirect('home-page')
         else:
             messages.error(request, "User does not exist")
-            return render(request, 'todoapp/login.html', {})
+            return redirect('login')
     
     return render(request, 'todoapp/login.html',{})
 
